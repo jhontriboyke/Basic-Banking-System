@@ -1,21 +1,9 @@
-class BankAccount {
-    constructor(balance) {
-        this._no_rek = Date.now()
-        this._balance = balance || 0
-    }
+import { random_time } from "./utils/random"
+import {is_a_number, is_positive, bare_minimum} from "./utils/input_validation" 
 
+class BankingSystem {
     // Fungsi random detik dari 1s - 3s
-    #randomTime() {
-        return (Math.floor(Math.random() * 3) + 1) * 1000
-    }
-
-    #checkNum(num) {
-        if(isNaN(num)) throw new Error("Please enter a valid number")
-    }
-
-    #bareMininum(num, minNum, type) {
-        if(num < minNum) throw new RangeError(`Minimum ${type} is ${minNum}`)
-    }
+    
 
     get balance() {
         return this._balance
@@ -24,8 +12,8 @@ class BankAccount {
     set deposit(amount) {
         try {
             // Validasi
-            this.#checkNum(amount)
-            this.#bareMininum(amount, 10_000, "deposit")
+            is_a_number(amount)
+            bare_minimum(amount, 10_000, "deposit")
             console.log("Loading...")
 
             new Promise(resolve => {
@@ -33,7 +21,7 @@ class BankAccount {
                     this._balance += amount
                     console.log(`Deposit success. Your balance: ${this._balance}`)
                     resolve()
-                }, this.#randomTime())
+                }, random_time())
             })
         } catch (error) {
             console.log(error, error.message)
@@ -43,8 +31,9 @@ class BankAccount {
     set withdraw(amount) {
         try {
             // Validasi
-            this.#checkNum(amount)
-            this.#bareMininum(amount, 10_000, "withdraw")
+            is_a_number(amount)
+            bare_minimum(amount, 10_000, "withdraw")
+
             console.log("Loading...")
 
             // Check nilai balance terhadap amount
@@ -57,7 +46,7 @@ class BankAccount {
                     this._balance -= amount
                     console.log(`Withdraw success. Your balance: ${this._balance}`)
                     resolve()
-                }, this.#randomTime())
+                }, random_time())
             })
         } catch (error) {
             console.log(error, error.message)
@@ -65,7 +54,4 @@ class BankAccount {
     }
 }
 
-
-// Test 1
-const account1 = new BankAccount(10_000)
-account1.deposit = 20000
+export default BankingSystem;
