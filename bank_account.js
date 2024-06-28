@@ -1,8 +1,8 @@
-import BankingSystem from "./banking_system"
+import BankingSystem from "./banking_system.js"
+
 export default class BankAccount extends BankingSystem {
-    constructor(name, balance) {
-        this._name = name
-        this._balance = balance || 0
+    constructor(balance) {
+        super(balance)
         this._no_rek = Date.now()
     }
 }

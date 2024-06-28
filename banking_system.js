@@ -1,15 +1,12 @@
-import { random_time } from "./utils/random"
-import {is_a_number, is_positive, bare_minimum} from "./utils/input_validation" 
+import { random_time } from "./utils/random.js"
+import { is_a_number, bare_minimum } from "./utils/input_validation.js" 
 
 class BankingSystem {
-    // Fungsi random detik dari 1s - 3s
-    
-
-    get balance() {
-        return this._balance
+    constructor(balance) {
+        this._balance = balance || 0
     }
-
-    set deposit(amount) {
+    
+    deposit(amount) {
         try {
             // Validasi
             is_a_number(amount)
@@ -28,7 +25,7 @@ class BankingSystem {
         }
     }
 
-    set withdraw(amount) {
+    withdraw(amount) {
         try {
             // Validasi
             is_a_number(amount)

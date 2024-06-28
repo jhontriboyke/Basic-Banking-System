@@ -1,10 +1,11 @@
-import BankAccount from "./bank_account";
+import BankAccount from "./bank_account.js";
 
 // Buat sebuah fungsi yg meminta user memilih tipe operasi
 function init() {
-    const temp = new BankAccount()
-}
+    const account = new BankAccount()
+    const input = prompt("Enter your balance")
+    account.deposit(input)
 
-function saveStorage(obj) {
-    localStorage.setItem("Bank Account", [...localStorage.getItem("Bank Account"), obj])
+    
+    console.log(account._balance)
 }
