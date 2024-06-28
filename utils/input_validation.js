@@ -1,15 +1,6 @@
-
-// membuat kelas CustomError extends dari class Error
-class CustomError extends Error {
-    constructor(name, message) {
-        super(message)
-        this.name = name
-    }
-}
-
 // Apakah num sebuah angka ?
 export const is_a_number = (num) => {
-    if (typeof(num) === 'number' || isNaN(num)) {
+    if (typeof(num) !== 'number' || isNaN(num)) {
         throw new TypeError("Please input a valid number")
     }
 }
@@ -23,7 +14,7 @@ export const is_positive = (num) => {
 
 // Apakah num lebih dari batas min
 export const bare_minimum = (num, min, type) => {
-    if (num < 0) {
+    if (num < min) {
         throw new RangeError(`Mininum ${type} is ${min}`)
     }
 }
