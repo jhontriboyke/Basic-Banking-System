@@ -1,34 +1,13 @@
-import BankAccount from "./bank_account.js";
+const express = require("express");
+require("dotenv").config();
+const PORT = process.env.SERVER_PORT;
+const usersRoutes = require("./routes/users.route");
 
-// Inisialisasi DOM
-const balance = document.getElementById("balance")
-const deposit_btn = document.getElementById("deposit_btn")
-const withdraw_btn = document.getElementById("withdraw_btn")
+const app = express();
+app.use(express.json());
 
-const account = new BankAccount()
+app.use("/users", usersRoutes);
 
-
-
-deposit_btn.addEventListener("click", async () => {
-    const num = getInput("Enter amount for deposit")
-    try {
-        await account.deposit(num)
-        balance.textContent = account.getBalance()
-    } catch (error) {
-        alert(error.message)
-    }
-})
-
-withdraw_btn.addEventListener("click", async () => {
-    const num = getInput("Enter amount for withdraw")
-    try {
-        await account.withdraw(num)
-        balance.textContent = account.getBalance()
-    } catch (error) {
-        alert(error.message)
-    }
-})
-
-function getInput(message) {
-    return +prompt(message, 0)
-}
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
